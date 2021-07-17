@@ -65,30 +65,49 @@ const movePiece = (startStack, endStack) => {
 // then check to make sure that the startStack is not the same as endStack
 // then check to make sure the element being moved is smaller than the one it is being moved on top of
 
-// let startString = stacks[startStack].join("");
-// let endString = stacks[endStack].join("");
-
 
 const isLegal = (startStack, endStack) => {
   console.log('the entered startStack is: ', startStack);
   console.log('the entered endStack is: ', endStack);
+  // let startArray = stacks[startStack];
+  // console.log("startArray ", startArray);
+  // let startArrayEnd = startArray.length-1;
   
-  
+  // console.log("startArrayEnd ", startArrayEnd);
+  // let endArray = stacks[endStack];
+  // console.log("endArray ", endArray);
+  // let endArrayEnd = endArray.length-1;
+  // console.log("endArrayEnd ", endArrayEnd);
+
 
   // start with checking to see if 'a' 'b' or 'c' was entered
   if((startStack != "a" && startStack != "b" && startStack != "c" ) || (endStack != "a" && endStack != "b" && endStack != "c" )){
     console.log("You have not entered 'a' 'b' or 'c', please try again");
     console.log("Note that the selection must be made in lower case");
-    return;
+    return false;
   } else if (stacks[startStack].join("") === ""){
     console.log("You have selected a empty stack for startStak");
     console.log("You must pick a stack with someting in it, please try again")
-    return;
+    return false;
   } else if (startStack === endStack){
     console.log("You can not pick the same stack for startStack and endStack");
     console.log("Please try again picking different stacks for startStack and endStack");
-    return;
-   } 
+    return false;
+   } else if ( "test" === "test"){
+    let startArray = stacks[startStack];
+    console.log("startArray ", startArray);
+    let startArrayEnd = startArray.length-1;
+    
+    console.log("startArrayEnd ", startArrayEnd);
+    let endArray = stacks[endStack];
+    console.log("endArray ", endArray);
+    let endArrayEnd = endArray.length-1;
+    console.log("endArrayEnd ", endArrayEnd);
+   } else if ((startArrayEnd < endArrayEnd) || (endArrayEnd == -1)){
+     console.log("Good selection!!")
+     return true;
+   } else console.log("The second stack selection must end with a larger number than the first stack selection")
+      return false;
 
 }
 
@@ -123,6 +142,11 @@ const towersOfHanoi = (startStack, endStack) => {
   // if it is legal we can move to the next function call below isLegal()
   // if it is not legal we need to print out a error message to let the user know the move was not legal  
   isLegal(startStack, endStack)
+    // if (isLegal() == false){
+    //   return false;
+    // } else {
+    //   return true;
+    // }
     // if not legal print a error message
     //if legal make move
     // check for win
