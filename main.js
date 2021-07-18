@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('assert');
+const { get } = require('http');
 const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,
@@ -20,7 +21,7 @@ const rl = readline.createInterface({
         // each move will remove from startStack using .pop() on end and add to the end of endStack using .push()
         // 
 let stacks = {
-  a: [4, 3, 2, 1],
+  a: [4,3,2,1],
   b: [],
   c: []
 };
@@ -160,6 +161,8 @@ const towersOfHanoi = (startStack, endStack) => {
   // if it is not legal we need to print out a error message to let the user know the move was not legal  
   const checking = isLegal(startStack, endStack);
   
+
+
     // if not legal print a error message
     //if legal make move
     movePiece(startStack, endStack);
@@ -187,6 +190,7 @@ const getPrompt = () => {
   rl.question('start stack: ', (startStack) => {
     rl.question('end stack: ', (endStack) => {
       towersOfHanoi(startStack, endStack);
+      
       const checkWin = checkForWin(startStack, endStack);
       if(checkWin){
         return false;
