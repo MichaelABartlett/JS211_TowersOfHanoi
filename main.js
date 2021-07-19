@@ -50,11 +50,11 @@ const printStacks = () => {
 const movePiece = (startStack, endStack) => {
   // pulling the last element from the array
   let movingPiece = stacks[startStack].pop();
-  console.log("movingPiece is: " ,movingPiece);
-  console.log("startStack array is now: ", stacks[startStack])
+  //console.log("movingPiece is: " ,movingPiece);
+  //console.log("startStack array is now: ", stacks[startStack])
   // putting the pulled element on the end of the endStack array
   stacks[endStack].push(movingPiece);
-  console.log("endStack array is: ", stacks[endStack]);
+  //console.log("endStack array is: ", stacks[endStack]);
 
 }
 
@@ -76,34 +76,45 @@ const movePiece = (startStack, endStack) => {
 
 
 const isLegal = (startStack, endStack) => {
-  console.log('the entered startStack is: ', startStack);
-  console.log('the entered endStack is: ', endStack);
-  // converting the startStack array to a string
-  let startString = stacks[startStack].toString();
-  console.log("startString ", startString);
-  // finding the last character in the startString 'string'
-  let startStringEnd = startString.charAt(startString.length-1);
-  console.log("startStringEnd ", startStringEnd);
-  // changing the startStringEnd 'string' into a 'number'
-  let startNumEnd = parseInt(startStringEnd);
-  console.log("startNumEnd: " ,startNumEnd);
 
-  // converting the endStack array to a string
-  let endString = stacks[endStack].toString();
-  console.log("endString ", endString);
-  // finding the last character in the endString 'string'
-  let endStringEnd = endString.charAt(endString.length-1);
-  console.log("endStringEnd ", endStringEnd);
-  // changing the endStringEnd 'string' into a 'number'
-  let endNumEnd = parseInt(endStringEnd);
-  console.log("endNumEnd: " ,endNumEnd);
+  
+  //console.log('the entered startStack is: ', startStack);
+  //console.log('the entered endStack is: ', endStack);
+
+  
+  let startNumEnd;
+  let endNumEnd;
+  let endStringEnd;
+
+      // converting the startStack array to a string
+      let startString = stacks[startStack].toString();
+      console.log("startString ", startString);
+      // finding the last character in the startString 'string'
+      let startStringEnd = startString.charAt(startString.length-1);
+      console.log("startStringEnd ", startStringEnd);
+      // changing the startStringEnd 'string' into a 'number'
+      startNumEnd = parseInt(startStringEnd);
+      console.log("startNumEnd: " ,startNumEnd);
+  
+      // converting the endStack array to a string
+      let endString = stacks[endStack].toString();
+      console.log("endString ", endString);
+      // finding the last character in the endString 'string'
+      endStringEnd = endString.charAt(endString.length-1);
+      console.log("endStringEnd ", endStringEnd);
+      // changing the endStringEnd 'string' into a 'number'
+      endNumEnd = parseInt(endStringEnd);
+      console.log("endNumEnd: " ,endNumEnd);
+  
   
 
   // start with checking to see if 'a' 'b' or 'c' was entered
-  if((startStack != "a" && startStack != "b" && startStack != "c" ) || (endStack != "a" && endStack != "b" && endStack != "c" )){
+
+  if ((startStack != "a" && startStack != "b" && startStack != "c" ) || (endStack != "a" && endStack != "b" && endStack != "c" )){
     console.log("You have not entered 'a' 'b' or 'c', please try again");
     console.log("Note that the selection must be made in lower case");
-    return false;
+      return false;
+   
     // checking to make sure the startStack is not empty
   } else if (stacks[startStack].join("") === ""){
     console.log("You have selected a empty stack for startStak");
@@ -114,11 +125,11 @@ const isLegal = (startStack, endStack) => {
     console.log("You can not pick the same stack for startStack and endStack");
     console.log("Please try again picking different stacks for startStack and endStack");
     return false;
-   } else if ((startNumEnd < endNumEnd) || (endStringEnd == "")){
+   } else if((startNumEnd < endNumEnd) || (endStringEnd == "")){
      console.log("Good selection!!")
      return true;
-   } else console.log("The second stack selection must end with a larger number than the first stack selection")
-      return false;
+   } else 
+     return false;
 
 
 }
@@ -159,13 +170,20 @@ const towersOfHanoi = (startStack, endStack) => {
   // first we need to check to make sure the values put into startStack and endStack are legal moves
   // if it is legal we can move to the next function call below isLegal()
   // if it is not legal we need to print out a error message to let the user know the move was not legal  
-  const checking = isLegal(startStack, endStack);
   
+  
+  // if (!isLegal(startStack, endStack)){
+  //     movePiece(startStack, endStack);
+  //   } else {
+  //    return false;
+  //   }
 
+    const checking = isLegal(startStack,endStack);
 
+    movePiece(startStack,endStack);
     // if not legal print a error message
     //if legal make move
-    movePiece(startStack, endStack);
+   
     // check for win
 
     // if they win say congradulations
@@ -191,11 +209,13 @@ const getPrompt = () => {
     rl.question('end stack: ', (endStack) => {
       towersOfHanoi(startStack, endStack);
       
+      
       const checkWin = checkForWin(startStack, endStack);
       if(checkWin){
         return false;
       }
       getPrompt();
+      
     });
   });
 }
